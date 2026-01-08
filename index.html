@@ -6,184 +6,251 @@
 <title>Gloom Sparks | Content Creation</title>
 
 <style>
-:root {
-    --bg: #0e0e0e;
-    --text: #ffffff;
-    --card: #1b1b1b;
-    --accent: #ff8a00;
+:root{
+    --bg:#0e0e0e;
+    --text:#ffffff;
+    --card:#1b1b1b;
+    --accent:#ff8a00;
 }
 
-.light {
-    --bg: #f5f5f5;
-    --text: #111111;
-    --card: #ffffff;
-    --accent: #ff5f00;
+.light{
+    --bg:#f4f4f4;
+    --text:#111111;
+    --card:#ffffff;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    transition: 0.3s;
+/* BASIC */
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:0.3s;
 }
 
-header {
-    padding: 60px 20px;
-    text-align: center;
-    background: linear-gradient(90deg, #ff5f6d, #ffc371);
-    color: #000;
+/* PRELOADER */
+#loader{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#000;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    z-index:9999;
 }
 
-header h1 {
-    font-size: 42px;
-    margin: 0;
+/* TOGGLES */
+.toggle{
+    position:fixed;
+    top:15px;
+    right:15px;
+    background:var(--card);
+    padding:8px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    z-index:99;
 }
 
-header p {
-    font-size: 18px;
+.colors{
+    position:fixed;
+    top:60px;
+    right:15px;
+    z-index:99;
+}
+.colors button{
+    border:none;
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    margin:4px;
+    cursor:pointer;
 }
 
-.toggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: var(--card);
-    color: var(--text);
-    padding: 8px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 14px;
+/* HEADER */
+header{
+    padding:90px 20px;
+    text-align:center;
+    background:linear-gradient(90deg,#ff5f6d,#ffc371);
+    color:#000;
 }
 
-nav {
-    background: var(--card);
-    padding: 10px;
-    text-align: center;
+/* NAV */
+nav{
+    background:var(--card);
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+}
+nav a{
+    color:var(--text);
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:bold;
 }
 
-nav a {
-    color: var(--text);
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
+/* SECTIONS */
+section{
+    padding:70px 20px;
+    text-align:center;
 }
 
-section {
-    padding: 60px 20px;
-    text-align: center;
+/* CARDS */
+.services{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+.card{
+    background:var(--card);
+    width:260px;
+    padding:20px;
+    border-radius:12px;
 }
 
-.services {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+/* PORTFOLIO */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-top:30px;
+}
+.gallery img{
+    width:100%;
+    border-radius:12px;
+    transition:0.4s;
+}
+.gallery img:hover{
+    transform:scale(1.05);
 }
 
-.card {
-    background: var(--card);
-    width: 260px;
-    padding: 20px;
-    border-radius: 10px;
+/* FOOTER */
+footer{
+    background:var(--card);
+    padding:20px;
+    font-size:14px;
 }
 
-.card h3 {
-    color: var(--accent);
+/* SCROLL ANIMATIONS */
+.reveal-left{
+    opacity:0;
+    transform:translateX(-60px);
+    transition:1s;
+}
+.reveal-right{
+    opacity:0;
+    transform:translateX(60px);
+    transition:1s;
+}
+.reveal-zoom{
+    opacity:0;
+    transform:scale(0.85);
+    transition:1s;
+}
+.active{
+    opacity:1;
+    transform:none;
 }
 
-.btn {
-    background: var(--accent);
-    color: #000;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    margin-top: 15px;
-}
-
-footer {
-    background: var(--card);
-    padding: 20px;
-    font-size: 14px;
+@media(max-width:600px){
+    header h1{font-size:34px;}
 }
 </style>
 </head>
 
 <body>
 
+<!-- PRELOADER -->
+<div id="loader">Gloom Sparks</div>
+
+<!-- TOGGLES -->
 <div class="toggle" onclick="toggleMode()">🌙 / ☀️</div>
 
-<header>
+<div class="colors">
+    <button style="background:#ff8a00" onclick="setColor('#ff8a00')"></button>
+    <button style="background:#8a2be2" onclick="setColor('#8a2be2')"></button>
+    <button style="background:#00c6ff" onclick="setColor('#00c6ff')"></button>
+</div>
+
+<!-- HEADER -->
+<header class="reveal-zoom">
     <h1>Gloom Sparks</h1>
-    <p>Igniting Creativity Through Digital Content</p>
-    <p><strong>Created by Zads</strong></p>
+    <p>Creative Content • Digital Impact</p>
+    <p><strong>Created by zads</strong></p>
 </header>
 
-<nav>
+<nav class="reveal-left">
     <a href="#services">Services</a>
-    <a href="#about">About</a>
+    <a href="#portfolio">Portfolio</a>
     <a href="#contact">Contact</a>
 </nav>
 
-<section id="services">
+<section id="services" class="reveal-right">
     <h2>What We Create</h2>
     <div class="services">
-        <div class="card">
-            <h3>Social Media Content</h3>
-            <p>Instagram, TikTok & Facebook posts, captions and reels.</p>
-        </div>
-        <div class="card">
-            <h3>Video Editing</h3>
-            <p>Short-form videos, reels, YouTube edits & promo clips.</p>
-        </div>
-        <div class="card">
-            <h3>Graphic Design</h3>
-            <p>Posters, thumbnails, branding visuals & templates.</p>
-        </div>
-        <div class="card">
-            <h3>Content Strategy</h3>
-            <p>Planning, scheduling and growth-focused content ideas.</p>
-        </div>
+        <div class="card reveal-zoom">Social Media Content & Reels</div>
+        <div class="card reveal-zoom">Video Editing & Shorts</div>
+        <div class="card reveal-zoom">Graphic Design & Branding</div>
+        <div class="card reveal-zoom">Content Strategy & Growth</div>
     </div>
 </section>
 
-<section id="about">
-    <h2>About Gloom Sparks</h2>
-    <p>
-        Gloom Sparks is a creative content brand focused on storytelling,
-        visuals and digital impact. We turn ideas into engaging content
-        that connects with people.
-    </p>
+<section id="portfolio" class="reveal-left">
+    <h2>Portfolio</h2>
+    <p>Replace images with your real work</p>
+    <div class="gallery">
+        <img src="C:\Users\IT\Desktop\images\WhatsApp Image 2026-01-08 at 10.12.16 AM (1).jpeg">
+        <img src="C:\Users\IT\Desktop\images\WhatsApp Image 2026-01-08 at 10.12.16 AM.jpeg">
+        <img src="C:\Users\IT\Desktop\images\WhatsApp Image 2026-01-08 at 10.12.15 AM (2).jpeg">
+        <img src="C:\Users\IT\Desktop\images\WhatsApp Image 2026-01-08 at 10.12.15 AM (1).jpeg">
+        <img src="C:\Users\IT\Desktop\images\WhatsApp Image 2026-01-08 at 10.12.15 AM.jpeg">
+    </div>
 </section>
 
-<section id="contact">
-    <h2>Get in Touch</h2>
+<section id="contact" class="reveal-right">
+    <h2>Contact</h2>
     <p>
-        📧 Email: <strong>zadsofficial119@gmail.com</strong><br><br>
-        📞 Contact: <strong>071 633 6305</strong><br><br>
-        📸 Instagram:
-        <a href="https://www.instagram.com/_zads._?igsh=MTN4bzczcmswaG5tdQ%3D%3D&utm_source=qr"
-           target="_blank"
-           style="color: var(--accent); font-weight:bold;">
-           @_zads._
-        </a>
+        📧 zadsofficial119@gmail.com<br><br>
+        📞 071 633 6305<br><br>
+        📸 <a href="https://www.instagram.com/_zads._" target="_blank"
+             style="color:var(--accent);font-weight:bold;">@_zads._</a>
     </p>
-    <a class="btn" href="mailto:zadsofficial119@gmail.com">Work With Me</a>
 </section>
 
 <footer>
-    © 2026 Gloom Sparks • Created by Zads
+    © 2026 Gloom Sparks • Created by zads
 </footer>
 
 <script>
-function toggleMode() {
+/* PRELOADER */
+window.addEventListener("load",()=>{
+    document.getElementById("loader").style.display="none";
+});
+
+/* DARK/LIGHT */
+function toggleMode(){
     document.body.classList.toggle("light");
 }
+
+/* COLOR SWITCH */
+function setColor(color){
+    document.documentElement.style.setProperty('--accent', color);
+}
+
+/* SCROLL REVEAL */
+const reveals=document.querySelectorAll(".reveal-left,.reveal-right,.reveal-zoom");
+window.addEventListener("scroll",()=>{
+    reveals.forEach(el=>{
+        if(el.getBoundingClientRect().top < window.innerHeight-100){
+            el.classList.add("active");
+        }
+    });
+});
 </script>
 
 </body>
 </html>
-
-
